@@ -22,7 +22,8 @@ int main()
     int choise;
     std::cin >> choise;
 
-    double* arr = new double[arraySize];
+    int* arr = new int[arraySize];
+    int* arr2 = new int[arraySize];
 
     switch (choise)
     {
@@ -50,8 +51,6 @@ int main()
     }
 
     printArray(arr, arraySize, 0);
-
-    double* arr2 = new double[arraySize];
 
     for (int i = 0; i < arraySize; i++)
     {
