@@ -11,56 +11,45 @@ double my_abs(double x) {
 	return x;
 }
 
-double CalculateDegree(double x, int k)
-{
-	for (int i = 1; i < k; i++)
-	{
-		x *= x;
-	}
+double enter_x() {
+	double x;
+	setlocale(LC_ALL, "Russian");
+	cout << "Введите x(0 < x <= 1):" << endl;
+	cin >> x;
 
 	return x;
 }
 
-int CalculateFactorial(int x)
-{
-	int i;
-	for (i = 1; i <= x; i++)
-	{
-		i *= i;
+double calculate_sum(double* x, int& k, const double eps = 1e-6) {
+	double t = 1, l = 1, z = 1;
+	double u = -1 * (2 * *x) / 3;
+	double s = u;
+	double p = 1;
+	k = 1;
+	for (k = 2; abs(u) > eps; k++) {
+		for (int i = 0; i < k; i++) {
+			t *= *x;
+			l *= -1;
+			z *= 3;
+		}
+		t = t * l * (k + 1);
+		p *= 2 * k - 1;
+		u = t / (p * z);
+		s += u;
 	}
-	return i;
+
+	return s;
 }
 
-double calculate_subsum(double x, int k)
-{
-	int equationSymbol = CalculateDegree(-1, k);
-	double xDegree = CalculateDegree(x, k);
-	double bottomPart = CalculateFactorial((2 * k - 1));
-	int threeDegree = CalculateDegree(3, k);
+int main() {
+	setlocale(LC_ALL, "Rus");
+	const double eps = 1e-6;
 
-	return (equationSymbol * xDegree * (k+1)) / (bottomPart * threeDegree);
-}
+	double x = enter_x();
+	int k = 0;
+	double result = calculate_sum(&x, k, eps);
 
-int main() 
-{
-	setlocale(LC_ALL, "Russian");
-	double eps = 1e-6;
-	double sum = 0;
-	double sumPart = 0;
-	
-	double x;
-	int k = 1;
-
-	std::cout << "Enter x: ";
-	std::cin >> x;
-
-	do
-	{
-		sumPart = calculate_subsum(x, k);
-		sum += sumPart;
-		k++;
-	} 
-	while (my_abs(sumPart) > eps);
-
-	std::cout << sum << " " << k;
+	cout << "Сумма = " << result << endl;
+	cout << "Количество слагаемых = " << k << endl;
+	return 0;
 }
