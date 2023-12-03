@@ -17,26 +17,32 @@ void  main()
 	cout << "Введите вашу строку: \n";
 	cin.getline(s, 256);
 	n = strlen(s);
-	for (int i = 0; i < n; i++) {
-		if (i > 0 && is_digit(s[i - 1])) {
+	for (int i = 0; i < n; i++) 
+	{
+		if (i > 0 && is_digit(s[i - 1])) 
+		{
 			continue;
 		}
 
-		if (!is_digit(s[i])) {
+		if (!is_digit(s[i])) 
+		{
 			continue;
 		}
 
-		if (is_digit(s[i + 2])) {
+		if (is_digit(s[i + 2])) 
+		{
 			continue;
 		}
 
 		int len = 1;
-		if (is_digit(s[i + 1])) {
+		if (is_digit(s[i + 1])) 
+		{
 			len = 2;
 		}
 
 		int j = 0;
-		for (j = 0; j < len; j++) {
+		for (j = 0; j < len; j++) 
+		{
 			s1[j] = s[i + j];
 		}
 		s1[j] = '\0';
